@@ -16,5 +16,4 @@
 -- limitations under the License.
 --
 
-/sample.txt
-/0000.sql
+select max(cal_dt) as cnt from test_kylin_fact

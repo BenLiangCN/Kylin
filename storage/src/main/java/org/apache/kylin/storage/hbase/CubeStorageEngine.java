@@ -63,7 +63,7 @@ public class CubeStorageEngine implements IStorageEngine {
 
     private static final Logger logger = LoggerFactory.getLogger(CubeStorageEngine.class);
 
-    private static final int MERGE_KEYRANGE_THRESHOLD = 7;
+    private static final int MERGE_KEYRANGE_THRESHOLD = 100;
     private static final long MEM_BUDGET_PER_QUERY = 3L * 1024 * 1024 * 1024; // 3G
 
     private final CubeInstance cubeInstance;
@@ -112,7 +112,6 @@ public class CubeStorageEngine implements IStorageEngine {
         // - columns on non-evaluatable filter have to return
         // - columns on loosened filter (due to derived translation) have to return
         Set<TblColRef> groupsCopD = Sets.newHashSet(groupsD);
-        groupsCopD.addAll(context.getOtherMandatoryColumns()); // TODO: this is tricky, to generalize
         collectNonEvaluable(filter, groupsCopD);
         TupleFilter filterD = translateDerived(filter, groupsCopD);
 
